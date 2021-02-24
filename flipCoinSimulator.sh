@@ -2,19 +2,39 @@
 
 Head=0
 Tails=0
-for((i=1;i<=10;i++))
+tailsWin=0
+headWin=0
+for((i=1;i<=40;i++))
 do
-	random=$((RANDOM%2))
-	if(($random == 1 ))
+	for((j=1;j<=10;j++))
+	do
+		random=$((RANDOM%2))
+		if(($random == 1 ))
+		then
+		 	((Head++))
+		else
+			((Tails++))
+		fi
+	done
+	if(($Head > $Tails))
 	then
-		 ((Head++))
+		echo "Head is win="
+		((headWin++))
 	else
-		((Tails++))
+		echo "Tails is win="
+		((tailsWin++))
 	fi
 done
-if(($Head > $Tails))
+if(($tailsWin > $headWin ))
 then
-	echo "Head is win=" $Head
+	howmuch=$(($tailsWin-$headWin))
+	echo "TailsWin by " $howmuch
+elif(($headWin > $tailsWin))
+then
+	howmuch=$(($headWin-$tailsWin))
+	echo "Tails Win by "$howmuch
 else
-	echo "Tails is win=" $Tails
+	echo "Tie"
 fi
+
+
